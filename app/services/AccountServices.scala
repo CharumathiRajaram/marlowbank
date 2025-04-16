@@ -23,10 +23,7 @@ class AccountServices extends Logging {
         logger.info("validate password")
         if (request.password.equals(accountDetails.password.getOrElse(""))) {
           logger.info("password validation successful")
-          println(request.amount, accountDetails.balance)
           if (request.amount <= accountDetails.balance) {
-            println(request.amount, accountDetails.balance)
-            println(accountDetails)
             val newBalance = accountDetails.balance.getOrElse(BigDecimal(0)) - request.amount.getOrElse(BigDecimal(0))
             val transactionDetails = TransactionDTO(id = 0, transactionId = Some(UUID.randomUUID()), accountId = accountDetails.id, operation = "WITHDRAW", amount = request.amount.get, transactionTime = LocalDateTime.now(), balanceAfter = newBalance
             )
