@@ -1,14 +1,15 @@
 package repository
+
 import com.typesafe.config.{Config, ConfigFactory}
 import com.zaxxer.hikari.{HikariConfig, HikariDataSource}
 import slick.jdbc.JdbcBackend.Database
 import utils.Logging
 
-object DBConnection extends Logging{
+object DBConnection extends Logging {
   //load config file
-val config: Config =ConfigFactory.load()
-//  create HikariCP config
-  private val hikariConfig=new HikariConfig()
+  val config: Config = ConfigFactory.load()
+  //  create HikariCP config
+  private val hikariConfig = new HikariConfig()
   hikariConfig.setJdbcUrl(config.getString("db.uri"))
   hikariConfig.setUsername(config.getString("db.user"))
   hikariConfig.setPassword(config.getString("db.secret"))
@@ -19,11 +20,14 @@ val config: Config =ConfigFactory.load()
   // Create the database connection using the data source
   val dbConnection: Database = Database.forDataSource(dataSource, Some(config.getInt("db.maximum_pool_size")))
   logger.info("database connection established")
+
   // Function to close the database connection
   def closeConnection(): Unit = {
     dbConnection.close()
     dataSource.close()
     logger.info("database connection closed")
   }
+
+  val handleDB = new OperationHandler(dbConnection)
 }
 
