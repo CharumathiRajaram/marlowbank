@@ -4,7 +4,9 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index()
+POST     /withdraw                              controllers.HomeController.withdraw()
+POST     /deposit                               controllers.HomeController.deposit()
+POST     /balanceCheck                          controllers.HomeController.balanceCheck()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
