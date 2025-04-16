@@ -1,10 +1,10 @@
 package services
 
 import models.RequestModel
+import models.dto.{AccountsDTO, TransactionDTO}
 import play.api.mvc.Result
 import repository.DBConnection
 import play.api.mvc.Results._
-import repository.dto.{AccountsDTO, TransactionDTO}
 import utils.Logging
 
 import java.time.LocalDateTime

@@ -1,11 +1,11 @@
-package repository.mapping
+package models.mapping
 
+import models.dto
+import models.dto.AccountsDTO
 import slick.lifted.{ProvenShape, Tag}
 
 import java.time.LocalDateTime
 import repository.ExtendedPostgresProfile.api._
-import repository.dto
-import repository.dto.AccountsDTO
 
 class AccountsTable(tag: Tag) extends Table[AccountsDTO](tag, Some("marlow"), "accounts") {
   def id: Rep[Long] = column[Long]("id", O.PrimaryKey, O.AutoInc)

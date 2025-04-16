@@ -1,4 +1,4 @@
-package repository.dto
+package models.dto
 
 import play.api.libs.json.{Json, OFormat}
 

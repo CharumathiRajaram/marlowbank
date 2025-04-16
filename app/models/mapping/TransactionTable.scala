@@ -1,9 +1,9 @@
-package repository.mapping
+package models.mapping
 
+import models.dto.TransactionDTO
 import slick.lifted.{ProvenShape, Tag}
 import utils.OperationType
 import repository.ExtendedPostgresProfile.api._
-import repository.dto.TransactionDTO
 
 import java.time.LocalDateTime
 import slick.ast.BaseTypedType

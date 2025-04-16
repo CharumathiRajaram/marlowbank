@@ -1,11 +1,11 @@
 package repository
 
+import models.dto.{AccountsDTO, TransactionDTO}
+import models.mapping.{AccountsTable, TransactionTable}
 import slick.jdbc.JdbcBackend.Database
 import slick.lifted.TableQuery
 import utils.Logging
 import repository.ExtendedPostgresProfile.api._
-import repository.dto.{AccountsDTO, TransactionDTO}
-import repository.mapping.{AccountsTable, TransactionTable}
 
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
