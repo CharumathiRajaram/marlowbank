@@ -39,11 +39,11 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
             serviceCall(value)
           case _ =>
             logger.error(s"Missing  credentials for $actionName")
-            Future.successful(BadRequest(Json.parse(s"""{ "Error": "Missing credentials to $actionName" }""")))
+            Future.successful(BadRequest(Json.obj("Error"-> "Missing credentials for $actionName")))
         }
       case None =>
         logger.error(s"No input provided for $actionName")
-        Future.successful(BadRequest(Json.parse(s"""{ "Error": "Please provide credentials to $actionName" }""")))
+        Future.successful(BadRequest(Json.obj( "Error"-> "Please provide necessary credentials for $actionName" )))
     }
   }
 
@@ -53,6 +53,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
    * @return HTTP Action to withdraw money from the account
    */
   def withdraw(): Action[AnyContent] = Action.async { implicit request =>
+    logger.info("Withdrawal process started....")
     handleRequest("withdraw")(accountService.withdraw)
   }
 
@@ -62,6 +63,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
    * @return HTTP Action to deposit money into the account
    */
   def deposit(): Action[AnyContent] = Action.async { implicit request =>
+    logger.info("Deposit process started....")
     handleRequest("deposit")(accountService.deposit)
   }
 
@@ -71,6 +73,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
    * @return HTTP Action to check account balance
    */
   def balanceCheck(): Action[AnyContent] = Action.async { implicit request =>
+    logger.info("Checking balance....")
     handleRequest("balance check")(accountService.balanceCheck)
   }
 }

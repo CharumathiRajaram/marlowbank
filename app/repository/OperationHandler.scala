@@ -26,13 +26,14 @@ class OperationHandler(datastore: Database) extends Logging {
    * @return   An `Option[AccountsDTO]` with account details if found, otherwise None or empty
    */
   def fetchAccount(id: Long): Option[AccountsDTO] = {
-    val passwordQuery = accountsTable.filter(acc => acc.id === id).result
+    logger.info(s"fetch account details for $id")
+    val fetchAccountQuery = accountsTable.filter(acc => acc.id === id).result
     try {
-      Await.result(datastore.run(passwordQuery), Duration.Inf).headOption
+      Await.result(datastore.run(fetchAccountQuery), Duration.Inf).headOption
     } catch {
       case err: Throwable =>
         logger.error(s"database error: exception while reading transaction. ${err.getMessage}")
-        Some(AccountsDTO.empty)
+        None
     }
   }
 
@@ -43,7 +44,7 @@ class OperationHandler(datastore: Database) extends Logging {
    * @return            The generated transaction ID if successful, otherwise 0
    */
   def updateTransaction(transaction: TransactionDTO): Long = {
-    logger.info("updating transaction log", transaction)
+    logger.info("update transaction log", transaction)
     val updateQuery = transactionTable returning transactionTable.map(_.id) += transaction
     try {
       Await.result(datastore.run(updateQuery), Duration.Inf)
@@ -63,7 +64,7 @@ class OperationHandler(datastore: Database) extends Logging {
    * @return        The number of rows affected (should be 1 if successful, 0 otherwise)
    */
   def updateAccount(accID: Long, balance: BigDecimal, version: Int): Int = {
-    logger.info("updating account balance", accID, balance, version)
+    logger.info("update account balance")
     val updateAccount = accountsTable.filter(acc => acc.id === accID)
     try {
       Await.result(
