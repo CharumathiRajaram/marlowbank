@@ -48,6 +48,7 @@ cd marlowbank
 ### 2. Configure Database (Edit `conf/application.conf`)
 
 ```hocon
+//Sample
 db{
 host="localhost"
 port=5432
@@ -60,7 +61,7 @@ minimum_idle_connection = "3"
 }
 ```
 
-> ⚠️ Make sure PostgreSQL is running and the `atm` database exists.
+> ⚠️ Make sure PostgreSQL is running and the `atm` database exists and tables.Essential sql query is given in the path sql/init.sql
 
 ### 3. Run the App
 
@@ -122,7 +123,7 @@ App will be accessible at: [http://localhost:9000](http://localhost:9000)
 ### Build Docker Image
 
 ```bash
-sbt stage
+sbt clean compile dist
 docker build -t marlowbank-app .
 ```
 
@@ -142,7 +143,8 @@ docker run -p 9000:9000 marlowbank-app
 │   ├── models            // DTOs & request models
 │   ├── repository        // DB access logic (Slick)
 │   ├── services          // Business logic
-│   └── utils             //other helper logic
+|   ├── utils             // other helper logic
+│   └── sql               // sql queries to create tables
 ├── conf
 │   └── application.conf
 ├── Dockerfile

@@ -21,3 +21,4 @@ libraryDependencies ++= Seq(guice,
 
 // Adds additional packages into conf/routes
 // play.sbt.routes.RoutesKeys.routesImport += "com.marlowbank.binders._"
+maintainer := "your.charumathir@marlow.org"
