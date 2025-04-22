@@ -2,21 +2,13 @@ package models.mapping
 
 import models.dto.TransactionDTO
 import slick.lifted.{ProvenShape, Tag}
-import utils.OperationType
 import repository.ExtendedPostgresProfile.api._
 
 import java.time.LocalDateTime
-import slick.ast.BaseTypedType
-import slick.jdbc.JdbcType
 
 import java.util.UUID
 
 class TransactionTable(tag: Tag) extends Table[TransactionDTO](tag, Some("marlow"), "transaction") {
-  implicit val operationTypeMapper: JdbcType[OperationType] with BaseTypedType[OperationType] =
-    MappedColumnType.base[OperationType, String](
-      OperationType.toString,
-      OperationType.fromString
-    )
 
   def id: Rep[Long] = column[Long]("id", O.PrimaryKey, O.AutoInc)
 
