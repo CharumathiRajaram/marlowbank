@@ -2,7 +2,7 @@
 
 <!-- https://www.playframework.com/documentation/latest/SettingsLogger -->
 
-<!DOCTYPE configuration>
+
 
 <configuration>
   <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"/>
@@ -39,10 +39,10 @@
     <appender-ref ref="STDOUT"/>
   </appender>
 
-  <logger name="play" level="INFO"/>
-  <logger name="application" level="DEBUG"/>
+<!--  <logger name="play" level="INFO"/>-->
+<!--  <logger name="application" level="INFO"/>-->
 
-  <root>
+  <root level="INFO">
     <appender-ref ref="ASYNCFILE"/>
     <appender-ref ref="ASYNCSTDOUT"/>
   </root>
